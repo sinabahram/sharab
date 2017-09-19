@@ -22,4 +22,4 @@ routes.WineMetaRoutes(app);
 routes.WineRoutes(app);
 routes.BottleRoutes(app);
 
-app..listen(process.env.PORT || 3000)
+app.listen(process.env.PORT || 3000)
