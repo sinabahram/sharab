@@ -1,0 +1,30 @@
+{
+  "name": "sharab",
+  "version": "1.0.0",
+  "description": "A NodeJS webapp with a RESTful API to manage a wine collection",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sinabahram/sharab.git"
+  },
+  "keywords": [
+    "wine"
+  ],
+  "author": "Sina Bahram",
+  "license": "MPL-2.0",
+  "bugs": {
+    "url": "https://github.com/sinabahram/sharab/issues"
+  },
+  "homepage": "https://github.com/sinabahram/sharab#readme",
+  "dependencies": {
+    "body-parser": "^1.18.1",
+    "express": "^4.15.4",
+    "express-handlebars": "^3.0.0",
+    "gulp": "^3.9.1",
+    "gulp-jsvalidate": "^3.0.0",
+    "mongoose": "^4.11.12"
+  }
+}
