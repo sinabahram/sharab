@@ -1,3 +1,4 @@
+var process = require('process');
 var express = require('express');
 var handlebars = require('express-handlebars');
 var mongoose = require('mongoose');
@@ -21,4 +22,4 @@ routes.WineMetaRoutes(app);
 routes.WineRoutes(app);
 routes.BottleRoutes(app);
 
-app.listen(3000);
+app..listen(process.env.PORT || 3000)
