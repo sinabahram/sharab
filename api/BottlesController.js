@@ -4,10 +4,8 @@ var mongoose = require('mongoose'),
   Bottle = mongoose.model('Bottles');
 
 exports.listAllBottles = function(req, res) {
-  Bottle.find({}, function(err, bottle) {
-    if (err)
-      res.send(err);
-    res.json(bottle);
+  Bottle.find({}, function(err, bottles) {
+    res.smartRender(req, res, err, bottles, 'bottles');
   });
 };
 
@@ -22,9 +20,7 @@ exports.createABottle = function(req, res) {
 
 exports.getABottle = function(req, res) {
   Bottle.findById(req.params.bottleId, function(err, bottle) {
-    if (err)
-      res.send(err);
-    res.json(bottle);
+    res.smartRender(req, res, err, bottle, 'bottles');
   });
 };
 

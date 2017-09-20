@@ -5,9 +5,7 @@ var mongoose = require('mongoose'),
 
 exports.listAllWineMeta = function(req, res) {
   WineMeta.find({}, function(err, wineMeta) {
-    if (err)
-      res.send(err);
-    res.json(wineMeta);
+    res.smartRender(req, res, err, wineMeta, 'wineMeta');
   });
 };
 
@@ -22,9 +20,7 @@ exports.createAWineMeta = function(req, res) {
 
 exports.getAWineMeta = function(req, res) {
   Wine.findById(req.params.wineMetaId, function(err, wineMeta) {
-    if (err)
-      res.send(err);
-    res.json(wineMeta);
+    res.smartRender(req, res, err, wineMeta, 'wineMeta');
   });
 };
 

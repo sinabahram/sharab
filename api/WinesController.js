@@ -4,10 +4,8 @@ var mongoose = require('mongoose'),
   Wine = mongoose.model('Wines');
 
 exports.listAllWines = function(req, res) {
-  Wine.find({}, function(err, wine) {
-    if (err)
-      res.send(err);
-    res.json(wine);
+  Wine.find({}, function(err, wines) {
+    res.smartRender(req, res, err, wines, 'wines');
   });
 };
 
@@ -22,9 +20,7 @@ exports.createAWine = function(req, res) {
 
 exports.getAWine = function(req, res) {
   Wine.findById(req.params.wineId, function(err, wine) {
-    if (err)
-      res.send(err);
-    res.json(wine);
+    res.smartRender(req, res, err, wine, 'wines');
   });
 };
 
