@@ -4,10 +4,24 @@ var Schema = mongoose.Schema;
 var ObjectID = mongoose.Schema.Types.ObjectId;
 
 var WineSchema = new Schema({
-  wineMeta: {
-    type: ObjectID,
-    ref: 'WineMeta',
-    required: true
+  name: {
+    type: String,
+    required: 'Enter the name of the wine'
+  },
+
+  maker: {
+    type: String,
+    required: 'Who makes this wine'
+  },
+
+  country: {
+    type: String,
+    required: 'Enter the country for this wine'
+  },
+
+  region: {
+    type: String,
+    required: 'Enter the region for this wine'
   },
 
   grapes: {
@@ -27,8 +41,8 @@ var WineSchema = new Schema({
 
   abv: {
     type: Number,
-    min: 8,
-    max: 32
+    min: 0.0,
+    max: 1.0
   },
 
   statuses: {
@@ -58,9 +72,16 @@ var WineSchema = new Schema({
     default: undefined
   },
 
-  Created_date: {
+  created: {
     type: Date,
-    default: Date.now
+    default: Date.now,
+    required:true
+  },
+
+  lastUpdated: {
+    type: Date,
+    default: Date.now,
+    required:true
   }
   });
 

@@ -5,10 +5,11 @@ var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 var models = require('./models');
 var routes = require('./routes');
-
 var app = express();
  
-app.engine('handlebars', handlebars({defaultLayout: 'main'}));
+var hbs = handlebars.create({defaultLayout: 'main', partialsDir: ['views/partials/']});
+
+app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
 
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -22,27 +23,23 @@ function wantsJson() {
   return this.accepts('html', 'json') === 'json';
 }
 
-function smartRender(res, req, err, data, view) {
+function smartRender(req, res, err, data, view) {
 if (err)
   res.send(err);
 
   if(req.wantsJson())
     res.json(data);
   else
-    res.render(view, {data: data});
+    res.render(view, {[view]: data});
 }
 
 app.use(function (req, res, next) {
   req.wantsJson = wantsJson;
-  req.smartRender= smartRender;
+  res.smartRender= smartRender;
   next();
 });
 
-
-
-
 routes.IndexRoutes(app);
-routes.WineMetaRoutes(app);
 routes.WineRoutes(app);
 routes.BottleRoutes(app);
 
