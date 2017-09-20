@@ -6,6 +6,7 @@ var ObjectID = mongoose.Schema.Types.ObjectId;
 var BottlesSchema = new Schema({
   wine: {
     type: ObjectID,
+    ref: 'Wines',
     required: true
   },
 
