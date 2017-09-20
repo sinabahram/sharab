@@ -18,6 +18,7 @@ app.use(bodyParser.json());
 mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://heroku_3nn23cgm:2e2q0q59dtqqbnasohqtqj1ml1@ds141514.mlab.com:41514/heroku_3nn23cgm'); 
 
+routes.IndexRoutes(app);
 routes.WineMetaRoutes(app);
 routes.WineRoutes(app);
 routes.BottleRoutes(app);
