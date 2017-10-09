@@ -6,13 +6,13 @@ module.exports = function(app) {
     .get(winesController.listAllWines)
     .post(winesController.createAWine);
 
+  app.route('/wines/new')
+    .get(winesController.newWineForm)
+    .post(winesController.createAWine);
+
   app.route('/wines/:wineId')
     .get(winesController.getAWine)
     .put(winesController.updateAWine)
     .delete(winesController.deleteAWine);
-
-  app.route('/wines/new')
-    .get(winesController.newWineForm)
-    .post(winesController.createAWine);
 
 };
