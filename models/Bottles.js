@@ -3,10 +3,10 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var ObjectID = mongoose.Schema.Types.ObjectId;
 
-var BottlesSchema = new Schema({
+var BottleSchema = new Schema({
   wine: {
     type: ObjectID,
-    ref: 'Wines',
+    ref: 'Wine',
     required: true
   },
 
@@ -14,7 +14,7 @@ var BottlesSchema = new Schema({
     type: [{
       status: {
         type: String,
-        enum: ['aquired', 'to be stored', 'stored', 'drunk', 'other']
+        enum: ['aquired', 'to be stored', 'stored', 'drunk']
       },
       date: Date
     }],
@@ -24,7 +24,12 @@ var BottlesSchema = new Schema({
   },
 
   location: {
-    type: {storedAt: String, identifier: String},
+    type: String,
+    required: true
+  },
+
+  tag: {
+    type: String,
     required: true
   },
 
@@ -36,11 +41,7 @@ var BottlesSchema = new Schema({
     default: 0.75
   },
 
-  Created_date: {
-    type: Date,
-    default: Date.now
-  }
-});
+}, {timestamps: true});
 
-module.exports = mongoose.model('Bottles', BottlesSchema);
+module.exports = mongoose.model('Bottle', BottleSchema);
  

@@ -35,7 +35,7 @@ var WineSchema = new Schema({
   },
 
   urls: {
-    type: [String],
+    type: [{name: String, url: String}],
     default: undefined
   },
 
@@ -45,25 +45,12 @@ var WineSchema = new Schema({
     max: 1.0
   },
 
-  statuses: {
-    type: [{
-      status: {
-        type: String,
-        enum: ['aquired', 'to be stored', 'stored', 'drunk', 'other']
-      },
-      date: Date
-    }],
-
-    required: true,
-    default: [{name: 'aquired', date: Date.now}]
-  },
-
   description: String,
   comments: String,
   drinkBy: {first: Number, last: Number},
 
-  reviews: {
-    type: [{source: String, rating: Number, contents: String}],
+  ratings: {
+    type: [{source: String, rating: Number, notes: String}],
     default: undefined
   },
 
@@ -71,19 +58,7 @@ var WineSchema = new Schema({
     type: [{drankOn: {type: Date, default: Date.now}, notes: String, score: {type: Number, min: 1, max: 10}}],
     default: undefined
   },
+  }, {timestamps: true{);
 
-  created: {
-    type: Date,
-    default: Date.now,
-    required:true
-  },
-
-  lastUpdated: {
-    type: Date,
-    default: Date.now,
-    required:true
-  }
-  });
-
-module.exports = mongoose.model('Wines', WineSchema);
+module.exports = mongoose.model('Wine', WineSchema);
  
