@@ -10,4 +10,9 @@ module.exports = function(app) {
     .get(winesController.getAWine)
     .put(winesController.updateAWine)
     .delete(winesController.deleteAWine);
+
+  app.route('/wines/new')
+    .get(winesController.newWineForm)
+    .post(winesController.createAWine);
+
 };

@@ -10,4 +10,8 @@ module.exports = function(app) {
     .get(bottlesController.getABottle)
     .put(bottlesController.updateABottle)
     .delete(bottlesController.deleteABottle);
+
+  app.route('/bottles/new')
+    .get(bottlesController.newBottleForm)
+    .post(bottlesController.createABottle);
 };
