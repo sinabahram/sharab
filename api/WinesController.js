@@ -1,7 +1,7 @@
 'use strict';
 
 var mongoose = require('mongoose'),
-  Wine = mongoose.model('Wines');
+  Wine = mongoose.model('Wine');
 
 exports.listAllWines = function(req, res) {
   Wine.find({}, function(err, wines) {

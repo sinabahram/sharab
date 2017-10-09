@@ -1,7 +1,7 @@
 'use strict';
 
 var mongoose = require('mongoose'),
-  Bottle = mongoose.model('Bottles');
+  Bottle = mongoose.model('Bottle');
 
 exports.listAllBottles = function(req, res) {
   Bottle.find({}, function(err, bottles) {
