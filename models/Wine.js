@@ -58,7 +58,7 @@ var WineSchema = new Schema({
     type: [{drankOn: {type: Date, default: Date.now}, notes: String, score: {type: Number, min: 1, max: 10}}],
     default: undefined
   },
-  }, {timestamps: true{);
+  }, {timestamps: true});
 
 module.exports = mongoose.model('Wine', WineSchema);
  
