@@ -41,3 +41,8 @@ exports.deleteABottle = function(req, res) {
     res.json({ message: 'Bottle successfully deleted' });
   });
 };
+
+exports.newBottleForm = function(req, res) {
+  res.render('bottles/new');
+};
+

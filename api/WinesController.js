@@ -41,3 +41,7 @@ exports.deleteAWine = function(req, res) {
     res.json({ message: 'Wine successfully deleted' });
   });
 };
+
+exports.newWineForm = function(req, res) {
+  res.render('wines/new');
+};
