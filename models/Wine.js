@@ -42,11 +42,12 @@ var WineSchema = new Schema({
   abv: {
     type: Number,
     min: 0.0,
-    max: 1.0
+    max: 1.0,
+    required: true
   },
 
   description: String,
-  comments: String,
+  notes: String,
   drinkBy: {first: Number, last: Number},
 
   ratings: {
