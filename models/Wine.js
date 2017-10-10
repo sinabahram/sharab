@@ -19,16 +19,27 @@ var WineSchema = new Schema({
     required: 'Enter the vintage of the wine (0 for NV)'
   },
 
-  country: {
+  wineType: {
     type: String,
+    enum: ['red', 'white', 'rose'],
+    default: 'red'
   },
 
-  region: {
-    type: String,
-  },
+  hasBubbles: Boolean,
+  country: String,
+  region: String,
 
   grapes: {
-    type: [{name: String, percentage: Number}],
+    type: [{
+      grape: {
+        type: ObjectID,
+        ref: 'Grape',
+      },
+      percentage: {
+        type: Number,
+        default: 100.0
+      }
+    }],
   },
 
   urls: {
@@ -46,15 +57,6 @@ var WineSchema = new Schema({
   notes: String,
   drinkBy: {first: Number, last: Number},
 
-  ratings: {
-    type: [{source: String, rating: Number, notes: String}],
-    default: undefined
-  },
-
-  tastings: {
-    type: [{drankOn: {type: Date, default: Date.now}, notes: String, score: {type: Number, min: 1, max: 10}}],
-    default: undefined
-  },
   }, {timestamps: true});
 
 module.exports = mongoose.model('Wine', WineSchema);
