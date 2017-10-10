@@ -1,14 +1,15 @@
 'use strict';
 module.exports = function(app) {
   var winesController = require('../api/WinesController');
+  var newWineValidation = require('../validations/newWine');
 
   app.route('/wines')
     .get(winesController.listAllWines)
-    .post(winesController.createAWine);
+    .post(newWineValidation, winesController.createAWine);
 
   app.route('/wines/new')
     .get(winesController.newWineForm)
-    .post(winesController.createAWine);
+    .post(newWineValidation, winesController.createAWine);
 
   app.route('/wines/:wineId')
     .get(winesController.getAWine)

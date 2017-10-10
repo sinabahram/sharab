@@ -14,24 +14,21 @@ var WineSchema = new Schema({
     required: 'Who makes this wine'
   },
 
+  vintage: {
+    type: Number,
+    required: 'Enter the vintage of the wine (0 for NV)'
+  },
+
   country: {
     type: String,
-    required: 'Enter the country for this wine'
   },
 
   region: {
     type: String,
-    required: 'Enter the region for this wine'
   },
 
   grapes: {
     type: [{name: String, percentage: Number}],
-    required: true,
-  },
-
-  vintage: {
-    type: Number,
-    required: 'Enter the vintage of the wine (0 for NV)'
   },
 
   urls: {
@@ -43,7 +40,6 @@ var WineSchema = new Schema({
     type: Number,
     min: 0.0,
     max: 1.0,
-    required: true
   },
 
   description: String,

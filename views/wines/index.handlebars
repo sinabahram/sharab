@@ -4,6 +4,24 @@
 Add New Wine
 </a>
 
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Maker</th>
+<th>Year</th>
+</tr>
+</thead>
+
+<tbody>
+
 {{#each wines}}
-{{this}}
+<tr>
+<td>{{this.name}}</td>
+<td>{{this.maker}}</td>
+<td>{{this.vintage}}</td>
+</tr>
 {{/each}}
+
+</tbody>
+</table>

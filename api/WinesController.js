@@ -12,10 +12,12 @@ exports.listAllWines = function(req, res) {
 exports.createAWine = function(req, res) {
   console.log("req.body = "+JSON.stringify(req.body));
   var new_wine = new Wine(req.body);
+
   new_wine.save(function(err, wine) {
     if (err)
       res.send(err);
-    res.json(wine);
+
+    res.redirect('/wines');
   });
 };
 
