@@ -24,7 +24,7 @@
     "body-parser": "^1.18.1",
     "express": "^4.15.4",
     "express-handlebars": "^3.0.0",
-    "express-validator": "^4.2.1",
+    "express-joi-validator": "^2.0.0",
     "gulp": "^3.9.1",
     "gulp-jsvalidate": "^3.0.0",
     "mongoose": "^4.11.12"
