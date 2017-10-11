@@ -14,7 +14,8 @@ exports.createABottle = function(req, res) {
   new_bottle.save(function(err, bottle) {
     if (err)
       res.send(err);
-    res.json(bottle);
+
+    res.redirect('/bottles');
   });
 };
 

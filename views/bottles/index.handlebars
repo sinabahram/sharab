@@ -4,6 +4,24 @@
 Add New Bottle
 </a>
 
-<p>
-Table of bottles will go here
-</p>
+<table>
+<thead>
+<tr>
+<th>Wine</th>
+<th>Tag</th>
+<th>Location</th>
+</tr>
+</thead>
+
+<tbody>
+
+{{#each bottles}}
+<tr>
+<td>{{this.wine}}</td>
+<td>{{this.tag}}</td>
+<td>{{this.location}}</td>
+</tr>
+{{/each}}
+
+</tbody>
+</table>

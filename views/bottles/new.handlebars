@@ -2,4 +2,23 @@
 
 <form method="post" action="/bottles">
 
+<label for="wine">
+Wine
+</label>
+<select id="wine" name="wine">
+{{#getWines}}
+</select>
+
+<label for="location">
+Location
+</label>
+<input type="text" id="location" name="location" />
+
+<label for="volumeInLiters">
+Volume In Liters
+</label>
+<input type="text" id="volumeInLiters" name="volumeInLiters" value="0.75" />
+
+<input type="submit" />
+
 </form>
