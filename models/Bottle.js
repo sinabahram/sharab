@@ -10,19 +10,6 @@ var BottleSchema = new Schema({
     required: true
   },
 
-  statuses: {
-    type: [{
-      status: {
-        type: String,
-        enum: ['aquired', 'to be stored', 'stored', 'drunk']
-      },
-      date: Date
-    }],
-
-    required: true,
-    default: [{name: 'aquired', date: Date.now}]
-  },
-
   location: {
     type: String,
     required: true
@@ -35,8 +22,8 @@ var BottleSchema = new Schema({
 
   volumeInLiters: {
     type: Number,
-    min: 0,
-    max: 5,
+    min: 0.05,
+    max: 5.0,
     required: true,
     default: 0.75
   },
