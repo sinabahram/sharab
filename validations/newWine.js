@@ -23,6 +23,5 @@ const newWineSchema = {
     drinkByMax: positiveInteger.allow(''),
   }
 };
-
  
 module.exports = ExpressJoi(newWineSchema);
