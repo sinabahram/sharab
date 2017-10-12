@@ -25,7 +25,12 @@ var WineSchema = new Schema({
     default: 'red'
   },
 
-  hasBubbles: Boolean,
+  hasBubbles: {
+    type: Boolean,
+    default: false,
+    required: true
+  },
+
   country: String,
   region: String,
 

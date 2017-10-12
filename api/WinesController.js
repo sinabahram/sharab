@@ -1,7 +1,8 @@
 'use strict';
 
-var mongoose = require('mongoose'),
-  Wine = mongoose.model('Wine');
+const mongoose = require('mongoose'),
+  Wine = mongoose.model('Wine'),
+  StatusChange = mongoose.model('StatusChange');
 
 exports.listAllWines = function(req, res) {
   Wine.find({}, function(err, wines) {
@@ -16,6 +17,9 @@ exports.createAWine = function(req, res) {
   new_wine.save(function(err, wine) {
     if (err)
       res.send(err);
+
+  const newStatusChange = new StatusChange({source: wine.id, from: 'undefined', to: 'created'});
+  newStatusChange.save();
 
     res.redirect('/wines');
   });
