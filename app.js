@@ -42,5 +42,6 @@ app.use(function (req, res, next) {
 routes.IndexRoutes(app);
 routes.WineRoutes(app);
 routes.BottleRoutes(app);
+routes.GrapeRoutes(app);
 
 app.listen(process.env.PORT || 3000)
