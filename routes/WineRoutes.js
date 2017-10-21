@@ -1,7 +1,7 @@
 'use strict';
 module.exports = function(app) {
   var winesController = require('../api/WinesController');
-  var newWineValidation = require('../validations/newWine');
+  const newWineValidation = require('../validations/newWine');
 
   app.route('/wines')
     .get(winesController.listAllWines)

@@ -29,7 +29,8 @@ exports.updateABottle = function(req, res) {
   Bottle.findOneAndUpdate({_id: req.params.bottleId}, req.body, {new: true}, function(err, bottle) {
     if (err)
       res.send(err);
-    res.json(bottle);
+
+    res.redirect('/bottles/'+bottleId);
   });
 };
 

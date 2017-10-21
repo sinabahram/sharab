@@ -1,0 +1,11 @@
+<h1>Grapes</h1>
+
+<a href="/bottles/new">
+Add New Grape
+</a>
+
+<ul>
+{{#each grapes}}
+<li><a href="{{this.url}}">{{this.name}}</a></li>
+{{/each}}
+</ul>
