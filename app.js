@@ -1,6 +1,7 @@
 var process = require('process');
 var express = require('express');
 var handlebars = require('express-handlebars');
+var handlebarsSections = require('express-handlebars-sections');
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 var models = require('./models');
@@ -8,7 +9,7 @@ var routes = require('./routes');
 var app = express();
  
 var hbs = handlebars.create({defaultLayout: 'main', partialsDir: ['views/partials/']});
-
+handlebarsSections(hbs);
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
 
