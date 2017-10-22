@@ -20,7 +20,7 @@ Add New Bottle
 
 {{#each bottles}}
 <tr>
-<td>{{this.wine}}</td>
+<td><a href="/wines/{{this.wine.tag}}">{{this.wine.name}}</a></td>
 <td>{{this.location}}</td>
 </tr>
 {{/each}}

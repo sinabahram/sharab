@@ -1,0 +1,76 @@
+{{#section 'title'}}
+Wine {{tagName}}
+{{/section}}
+
+<h1>Wine {{tagName}}</h1>
+
+<a href="/wines/new">
+Add Similar Wine
+</a>
+
+<h2>Basic Info</h2>
+<table>
+
+<thead>
+<tr>
+<th>Name</th>
+<th>Maker</th>
+<th>Year</th>
+<th>Region</th>
+<th>Country</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>{{name}}</td>
+<td>{{maker}}</td>
+<td>{{vintage}}</td>
+<td>{{region}}</td>
+<td>{{country}}</td>
+</tr>
+</tbody>
+
+</table>
+
+<h2>Additional info</h2>
+<table>
+
+<thead>
+<tr>
+<th>Type</th>
+<th>Tag</th>
+<th>ABV</th>
+<th>Bubbles</th>
+</tr>
+</thead>
+
+<tbody>
+<td>{{wineType}}</td>
+<td>{{tagName}}</td>
+<td>{{abv}}</td>
+<td>{{hasBubbles}}</td>
+</tbody>
+
+</table>
+
+<h2>Grapes</h2>
+<ul>
+{{#each grapes}}
+<li><a target="_blank" href="{{this.grape.url}}">{{this.percentage}}% {{this.grape.name}}</a></li>
+{{/each}}
+</ul>
+
+<h2>Description</h2>
+{{description}}
+
+<h2>Notes</h2>
+{{notes}}
+
+<h2>Related Links</h2>
+<ul>
+{{#each urls}}
+<li><a target="_blank" href="{{this.url}}">{{this.name}}</a>
+{{/each}}
+</ul>
+

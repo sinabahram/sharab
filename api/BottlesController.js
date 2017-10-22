@@ -5,8 +5,8 @@ const mongoose = require('mongoose'),
   Wine = mongoose.model('Wine');
 
 exports.listAllBottles = function(req, res) {
-  Bottle.find({}, function(err, bottles) {
-    res.smartRender(req, res, err, bottles, 'bottles');
+  Bottle.find().populate('wine').exec(function(err, bottles) {
+    return res.smartRender(req, res, err, {bottles: bottles}, 'bottles');
   });
 };
 
@@ -15,7 +15,7 @@ exports.createABottle = function(req, res) {
 
   newBottle.save(function(err, bottle) {
     if (err)
-      res.send(err);
+      return res.send(err);
 
     res.redirect('/bottles');
   }); // newBottle.save
@@ -23,14 +23,14 @@ exports.createABottle = function(req, res) {
 
 exports.getABottle = function(req, res) {
   Bottle.findById(req.params.bottleId, function(err, bottle) {
-    res.smartRender(req, res, err, bottle, 'bottles');
+    return res.smartRender(req, res, err, bottle, 'bottles/single');
   });
 };
 
 exports.updateABottle = function(req, res) {
   Bottle.findOneAndUpdate({_id: req.params.bottleId}, req.body, {new: true}, function(err, bottle) {
     if (err)
-      res.send(err);
+      return res.send(err);
 
     res.redirect('/bottles/'+bottleId);
   });
@@ -41,12 +41,17 @@ exports.deleteABottle = function(req, res) {
     _id: req.params.bottleId
   }, function(err, bottle) {
     if (err)
-      res.send(err);
-    res.json({ message: 'Bottle successfully deleted' });
+      return res.send(err);
+    return res.json({ message: 'Bottle successfully deleted' });
   });
 };
 
 exports.newBottleForm = function(req, res) {
-Wine.find({}, function(err, wines) {res.render('bottles/new', {wines: wines});});
+  Wine.find({}, function(err, wines) {
+    if(err)
+      return res.send(err);
+
+    return res.render('bottles/new', {wines: wines});
+  });
 };
 

@@ -37,8 +37,6 @@ var WineSchema = new Schema({
     required: true
   },
 
-
-
   country: String,
   region: String,
 

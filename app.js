@@ -26,12 +26,12 @@ function wantsJson() {
 
 function smartRender(req, res, err, data, view) {
 if (err)
-  res.send(err);
+  return res.send(err);
 
   if(req.wantsJson())
-    res.json(data);
+    return res.json(data);
   else
-    res.render(view, {[view]: data});
+    return res.render(view, data);
 }
 
 app.use(function (req, res, next) {

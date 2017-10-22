@@ -11,7 +11,7 @@ module.exports = function(app) {
     .get(winesController.newWineForm)
     .post(newWineValidation, winesController.createAWine);
 
-  app.route('/wines/:wineId')
+  app.route('/wines/:tag')
     .get(winesController.getAWine)
     .put(winesController.updateAWine)
     .delete(winesController.deleteAWine);

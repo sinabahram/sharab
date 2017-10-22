@@ -2,11 +2,19 @@
 
 const mongoose = require('mongoose'),
   Wine = mongoose.model('Wine'),
-  StatusChange = mongoose.model('StatusChange');
+  StatusChange = mongoose.model('StatusChange'),
+  Utils = require('../utils.js');
 
 exports.listAllWines = function(req, res) {
   Wine.find({}, function(err, wines) {
-    res.smartRender(req, res, err, wines, 'wines');
+    if(err)
+      return res.send(err);
+
+    for(var i=0, len=wines.length; i<len; i++) {
+      wines[i].tagName = Utils.decToTag(wines[i].tag);
+    }
+
+    return res.smartRender(req, res, err, {wines: wines}, 'wines');
   });
 };
 
@@ -29,9 +37,6 @@ else {
   var newWine = new Wine(req.body);
     newWine.tag = maxTag+1;
 
-console.log("maxTag = "+maxTag);
-  console.log("newWine = "+JSON.stringify(newWine));
-
   newWine.save(function(err, wine) {
     if (err)
       return res.send(err);
@@ -51,8 +56,13 @@ console.log("wine = "+wine);
 };
 
 exports.getAWine = function(req, res) {
-  Wine.findById(req.params.wineId, function(err, wine) {
-    res.smartRender(req, res, err, wine, 'wines');
+  Wine.findOne({tag: req.params.tag}, function(err, wine) {
+    if (err)
+      return res.send(err);
+
+    wine.tagName = Utils.decToTag(wine.tag);
+
+    return res.smartRender(req, res, err, wine, 'wines/single');
   });
 };
 
@@ -60,7 +70,8 @@ exports.updateAWine = function(req, res) {
   Wine.findOneAndUpdate({_id: req.params.wineId}, req.body, {new: true}, function(err, wine) {
     if (err)
       return res.send(err);
-    res.json(wine);
+
+    return res.json(wine);
   });
 };
 
@@ -70,10 +81,11 @@ exports.deleteAWine = function(req, res) {
   }, function(err, wine) {
     if (err)
       return res.send(err);
-    res.json({ message: 'Wine successfully deleted' });
+
+    return res.json({ message: 'Wine successfully deleted' });
   });
 };
 
 exports.newWineForm = function(req, res) {
-  res.render('wines/new');
+  return res.render('wines/new');
 };
