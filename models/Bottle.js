@@ -15,11 +15,6 @@ var BottleSchema = new Schema({
     required: true
   },
 
-  tag: {
-    type: String,
-    required: true
-  },
-
   volumeInLiters: {
     type: Number,
     min: 0.05,

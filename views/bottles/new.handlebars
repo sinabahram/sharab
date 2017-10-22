@@ -10,7 +10,9 @@ New Bottle
 Wine
 </label>
 <select id="wine" name="wine">
-{{!-- {{#getWines}} --}}
+{{#each wines}}
+{<option value="{{this.id}}">{{this.name}} - {{this.maker}}</option>
+{{/each}}
 </select>
 
 <label for="location">

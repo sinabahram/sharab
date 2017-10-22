@@ -1,7 +1,8 @@
 'use strict';
 
-var mongoose = require('mongoose'),
-  Bottle = mongoose.model('Bottle');
+const mongoose = require('mongoose'),
+  Bottle = mongoose.model('Bottle'),
+  Wine = mongoose.model('Wine');
 
 exports.listAllBottles = function(req, res) {
   Bottle.find({}, function(err, bottles) {
@@ -10,13 +11,14 @@ exports.listAllBottles = function(req, res) {
 };
 
 exports.createABottle = function(req, res) {
-  var new_bottle = new Bottle(req.body);
-  new_bottle.save(function(err, bottle) {
+  var newBottle = new Bottle(req.body);
+
+  newBottle.save(function(err, bottle) {
     if (err)
       res.send(err);
 
     res.redirect('/bottles');
-  });
+  }); // newBottle.save
 };
 
 exports.getABottle = function(req, res) {
@@ -45,6 +47,6 @@ exports.deleteABottle = function(req, res) {
 };
 
 exports.newBottleForm = function(req, res) {
-  res.render('bottles/new');
+Wine.find({}, function(err, wines) {res.render('bottles/new', {wines: wines});});
 };
 

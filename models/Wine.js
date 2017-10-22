@@ -31,6 +31,14 @@ var WineSchema = new Schema({
     required: true
   },
 
+  tag: {
+    type: Number,
+    min: 1.0,
+    required: true
+  },
+
+
+
   country: String,
   region: String,
 

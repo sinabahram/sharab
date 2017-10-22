@@ -11,10 +11,16 @@ exports.listAllWines = function(req, res) {
 };
 
 exports.createAWine = function(req, res) {
-  console.log("req.body = "+JSON.stringify(req.body));
-  var new_wine = new Wine(req.body);
+//  console.log("req.body = "+JSON.stringify(req.body));
 
-  new_wine.save(function(err, wine) {
+Wine.findOne({}).sort('-tag').exec(function (err, wineWithMaxTag) {
+    if (err)
+      res.send(err);
+
+  var newWine = new Wine(req.body);
+newWine.tag = wineWithMaxTag.tag+1;
+
+  newWine.save(function(err, wine) {
     if (err)
       res.send(err);
 
@@ -22,7 +28,8 @@ exports.createAWine = function(req, res) {
   newStatusChange.save();
 
     res.redirect('/wines');
-  });
+  }); // newWine.save()
+  }); // Wine.fineOne()
 };
 
 exports.getAWine = function(req, res) {
