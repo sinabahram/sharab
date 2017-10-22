@@ -15,14 +15,32 @@ exports.createAWine = function(req, res) {
 
 Wine.findOne({}).sort('-tag').exec(function (err, wineWithMaxTag) {
     if (err)
-      res.send(err);
+      return res.send(err);
+
+console.log("wine with max tag = "+wineWithMaxTag);
+    var maxTag = -1;
+    if(wineWithMaxTag === null) {
+      maxTag = 0;
+    }
+else {
+      maxTag = wineWithMaxTag.tag;
+    }
 
   var newWine = new Wine(req.body);
-newWine.tag = wineWithMaxTag.tag+1;
+    newWine.tag = maxTag+1;
+
+console.log("maxTag = "+maxTag);
+  console.log("newWine = "+JSON.stringify(newWine));
 
   newWine.save(function(err, wine) {
     if (err)
-      res.send(err);
+      return res.send(err);
+
+/*
+console.log("err = "+err);
+console.log("wine = "+wine);
+  console.log("wine in newWine.save() = "+JSON.stringify(wine));
+*/
 
   const newStatusChange = new StatusChange({source: wine.id, from: 'undefined', to: 'created'});
   newStatusChange.save();
@@ -41,7 +59,7 @@ exports.getAWine = function(req, res) {
 exports.updateAWine = function(req, res) {
   Wine.findOneAndUpdate({_id: req.params.wineId}, req.body, {new: true}, function(err, wine) {
     if (err)
-      res.send(err);
+      return res.send(err);
     res.json(wine);
   });
 };
@@ -51,7 +69,7 @@ exports.deleteAWine = function(req, res) {
     _id: req.params.wineId
   }, function(err, wine) {
     if (err)
-      res.send(err);
+      return res.send(err);
     res.json({ message: 'Wine successfully deleted' });
   });
 };
