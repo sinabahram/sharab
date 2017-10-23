@@ -28,10 +28,35 @@ Bubbles?
 <option value="true">Yes</option>
 </select>
 
-<label for="grapes">
-Grapes
+<div>
+<div id="grapes-container">
+<div>
+<label for="grape1">
+Grape 1
 </label>
-<input type="text" id="grapes" name="grapes" />
+<select id="grape1">
+{{#each grapes}}
+{<option value="{{this.id}}">{{this.name}}</option>
+{{/each}}
+</select>
+
+<label for="grape1-percentage">
+Grape1 Percentage
+</label>
+<input type="text" id="grape1-percentage" />
+</div>
+</div>
+<button type="button" id="btnAddNewGrape">Add Another Grape</button>
+</div>
+
+<label for="wineStyle">
+Wine Style
+</label>
+<select id="wineStyle" name="wineStyle">
+{{#each wineStyles}}
+{<option value="{{this.id}}">{{this.name}}</option>
+{{/each}}
+</select>
 
 <label for="country">
 Country
@@ -76,3 +101,30 @@ DrinkBy Year Max
 <input type="submit" />
 
 </form>
+
+<script language="javascript" type="text/javascript">
+var handleAddNewGrape = function(event) {
+var grapeDivsContainer = document.getElementById('grapes-container');
+var grapeDivs = grapeDivsContainer.children;
+var lastGrapeDiv = grapeDivs[grapeDivs.length-1];
+var newGrapeDiv = lastGrapeDiv.cloneNode(true);
+var newGrapeDivChildren = newGrapeDiv.children;
+
+var newGrape = 'grape'+(grapeDivs.length+1);
+
+newGrapeDivChildren[0].setAttribute('for', newGrape);
+newGrapeDivChildren[0].innerHTML = newGrape;
+newGrapeDivChildren[1].setAttribute('id', newGrape);
+
+var newGrapePercentage = newGrape+'-percentage';
+newGrapeDivChildren[2].setAttribute('for', newGrapePercentage);
+newGrapeDivChildren[2].innerHTML = newGrape+' Percentage';
+newGrapeDivChildren[3].setAttribute('id', newGrapePercentage);
+
+
+grapeDivsContainer.appendChild(newGrapeDiv);
+};
+
+document.getElementById('btnAddNewGrape').addEventListener('click', handleAddNewGrape);
+
+</script>

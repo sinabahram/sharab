@@ -44,5 +44,6 @@ routes.IndexRoutes(app);
 routes.WineRoutes(app);
 routes.BottleRoutes(app);
 routes.GrapeRoutes(app);
+routes.WineStyleRoutes(app);
 
 app.listen(process.env.PORT || 3000)

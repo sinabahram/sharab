@@ -2,6 +2,8 @@
 
 const mongoose = require('mongoose'),
   Wine = mongoose.model('Wine'),
+  Grape = mongoose.model('Grape'),
+  WineStyle = mongoose.model('WineStyle'),
   StatusChange = mongoose.model('StatusChange'),
   Utils = require('../utils.js');
 
@@ -87,5 +89,16 @@ exports.deleteAWine = function(req, res) {
 };
 
 exports.newWineForm = function(req, res) {
-  return res.render('wines/new');
+  WineStyle.find({}, function(err, wineStyles) {
+    if(err)
+      return res.send(err);
+
+  Grape.find({}, function(err, grapes) {
+    if(err)
+      return res.send(err);
+
+  return res.render('wines/new', {grapes: grapes, wineStyles: wineStyles});
+}); // Grape.find()
+}); // WineStyle.find()
+
 };

@@ -1,0 +1,15 @@
+{{#section 'title'}}
+WineStyles
+{{/section}}
+
+<h1>WineStyles</h1>
+
+<a href="/wineStyles/new">
+Add New Wine Style
+</a>
+
+<ul>
+{{#each wineStyles}}
+<li><a target="_blank" href="{{this.url}}">{{this.name}}</a></li>
+{{/each}}
+</ul>

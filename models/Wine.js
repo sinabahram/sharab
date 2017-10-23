@@ -40,6 +40,11 @@ var WineSchema = new Schema({
   country: String,
   region: String,
 
+  wineStyle: {
+    type: ObjectID,
+    ref: 'WineStyle',
+  },
+
   grapes: {
     type: [{
       grape: {
