@@ -23,6 +23,8 @@ var BottleSchema = new Schema({
     default: 0.75
   },
 
+  price: Number,
+
 }, {timestamps: true});
 
 module.exports = mongoose.model('Bottle', BottleSchema);

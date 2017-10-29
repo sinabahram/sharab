@@ -9,21 +9,26 @@ New Bottle
 <label for="wine">
 Wine
 </label>
-<select id="wine" name="wine">
+<select id="wine" name="wine" required>
 {{#each wines}}
 {<option value="{{this.id}}">{{this.name}} - {{this.maker}}</option>
 {{/each}}
 </select>
 
-<label for="location">
-Location
-</label>
-<input type="text" id="location" name="location" />
-
 <label for="volumeInLiters">
 Volume In Liters
 </label>
-<input type="text" id="volumeInLiters" name="volumeInLiters" value="0.75" />
+<input type="text" id="volumeInLiters" name="volumeInLiters" value="0.75" required pattern="\d\.\d{1,2}" />
+
+<label for="price">
+Price
+</label>
+<input type="text" id="price" name="price" value="0.75" required pattern="\d+\.\d{2}" />
+
+<label for="location">
+Location
+</label>
+<input type="text" id="location" name="location" pattern="[a-zA-Z]+" />
 
 <input type="submit" />
 

@@ -8,23 +8,23 @@ New Wine
 <label for="name">
 Name
 </label>
-<input type="text" id="name" name="name" />
+<input type="text" id="name" name="name" required />
 
 <label for="maker">
 Maker
 </label>
-<input type="text" id="maker" name="maker" />
+<input type="text" id="maker" name="maker" required />
 
 <label for="vintage">
 Vintage
 </label>
-<input type="text" id="vintage" name="vintage" />
+<input type="text" id="vintage" name="vintage" required pattern="0|\d{4}" />
 
 <label for="hasBubbles">
 Bubbles?
 </label>
 <select id="hasBubbles" name="hasBubbles">
-<option value="false">No</option>
+<option selected value="false">No</option>
 <option value="true">Yes</option>
 </select>
 
@@ -35,6 +35,7 @@ Bubbles?
 Grape 1
 </label>
 <select id="grape1">
+<option selected value="">Not Defined</option>
 {{#each grapes}}
 {<option value="{{this.id}}">{{this.name}}</option>
 {{/each}}
@@ -43,7 +44,7 @@ Grape 1
 <label for="grape1-percentage">
 Grape1 Percentage
 </label>
-<input type="text" id="grape1-percentage" />
+<input type="text" id="grape1-percentage" pattern="\d{1,3}" />
 </div>
 </div>
 <button type="button" id="btnAddNewGrape">Add Another Grape</button>
@@ -52,7 +53,8 @@ Grape1 Percentage
 <label for="wineStyle">
 Wine Style
 </label>
-<select id="wineStyle" name="wineStyle">
+<select id="wineStyle" name="wineStyle" >
+<option selected value="">Not Defined</option>
 {{#each wineStyles}}
 {<option value="{{this.id}}">{{this.name}}</option>
 {{/each}}
@@ -71,12 +73,24 @@ Region
 <label for="abv">
 ABV
 </label>
-<input type="text" id="abv" name="abv" />
+<input type="text" id="abv" name="abv" pattern="\d{2}\.\d{1,2}" />
 
-<label for="urls">
-URLs:
+<div>
+<div id="urls-container">
+<div>
+<label for="url1-name">
+URL-1 Name
 </label>
-<input type="text" id="urls" name="urls" />
+<input type="text" name="url1-name" id="url1-name" />
+
+<label for="url1">
+URL-1
+</label>
+<input type="url" id="url1" />
+</div>
+</div>
+<button type="button" id="btnAddNewURL">Add Another URL</button>
+</div>
 
 <label for="description">
 Description
@@ -91,40 +105,47 @@ Notes
 <label for="drinkByMin">
 DrinkBy Year Min
 </label>
-<input type="text" id="drinkByMin" name="drinkByMin" />
+<input type="number" id="drinkByMin" name="drinkByMin" value="2017" min="2017" max="2050" />
 
 <label for="drinkByMax">
 DrinkBy Year Max
 </label>
-<input type="text" id="drinkByMax" name="drinkByMax" />
+<input type="number" id="drinkByMax" name="drinkByMax" value="2017" min="2017" max="2050" />
 
 <input type="submit" />
 
 </form>
 
 <script language="javascript" type="text/javascript">
+var addNew = function(containerName, item1NameBase, item1NameSuffix, item2NameBase, item2NameSuffix) {
+var divsContainer = document.getElementById(containerName);
+var divs = divsContainer.children;
+var lastDiv = divs[divs.length-1];
+var newDiv = lastDiv.cloneNode(true);
+var newDivChildren = newDiv.children;
+
+var newItem1 = item1NameBase+(divs.length+1)+item1NameSuffix;
+newDivChildren[0].setAttribute('for', newItem1);
+newDivChildren[0].innerHTML = newItem1;
+newDivChildren[1].setAttribute('id', newItem1);
+
+var newItem2 = item2NameBase+(divs.length+1)+item2NameSuffix;
+newDivChildren[2].setAttribute('for', newItem2);
+newDivChildren[2].innerHTML = newItem2;
+newDivChildren[3].setAttribute('id', newItem2);
+
+divsContainer.appendChild(newDiv);
+};
+
 var handleAddNewGrape = function(event) {
-var grapeDivsContainer = document.getElementById('grapes-container');
-var grapeDivs = grapeDivsContainer.children;
-var lastGrapeDiv = grapeDivs[grapeDivs.length-1];
-var newGrapeDiv = lastGrapeDiv.cloneNode(true);
-var newGrapeDivChildren = newGrapeDiv.children;
+addNew('grapes-container', 'grape', '', 'grape', '-percentage');
+};
 
-var newGrape = 'grape'+(grapeDivs.length+1);
-
-newGrapeDivChildren[0].setAttribute('for', newGrape);
-newGrapeDivChildren[0].innerHTML = newGrape;
-newGrapeDivChildren[1].setAttribute('id', newGrape);
-
-var newGrapePercentage = newGrape+'-percentage';
-newGrapeDivChildren[2].setAttribute('for', newGrapePercentage);
-newGrapeDivChildren[2].innerHTML = newGrape+' Percentage';
-newGrapeDivChildren[3].setAttribute('id', newGrapePercentage);
-
-
-grapeDivsContainer.appendChild(newGrapeDiv);
+var handleAddNewURL = function(event) {
+addNew('urls-container', 'url', '-name', 'url', '');
 };
 
 document.getElementById('btnAddNewGrape').addEventListener('click', handleAddNewGrape);
+document.getElementById('btnAddNewURL').addEventListener('click', handleAddNewURL);
 
 </script>
