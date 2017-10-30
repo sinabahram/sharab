@@ -16,7 +16,7 @@ exports.createAGrape = function(req, res) {
     if (err)
       return res.send(err);
 
-  const newStatusChange = new StatusChange({source: grape.id, modelName: 'Grape', from: 'undefined', to: 'created'});
+  const newStatusChange = new StatusChange({source: grape.id, name: 'Grape', from: 'undefined', to: 'created'});
   newStatusChange.save();
 
     res.redirect('/grapes');

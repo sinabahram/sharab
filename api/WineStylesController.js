@@ -16,7 +16,7 @@ exports.createAWineStyle = function(req, res) {
     if (err)
       return res.send(err);
 
-  const newStatusChange = new StatusChange({source: wineStyle.id, modelName: 'WineStyle', from: 'undefined', to: 'created'});
+  const newStatusChange = new StatusChange({source: wineStyle.id, name: 'WineStyle', from: 'undefined', to: 'created'});
   newStatusChange.save();
 
     res.redirect('/wineStyles');

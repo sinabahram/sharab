@@ -36,6 +36,9 @@ else {
       maxTag = wineWithMaxTag.tag;
     }
 
+  if('wineStyle' in req.body && req.body.wineStyle.length === 0)
+    delete req.body.wineStyle;
+
   var newWine = new Wine(req.body);
     newWine.tag = maxTag+1;
 
@@ -49,7 +52,7 @@ console.log("wine = "+wine);
   console.log("wine in newWine.save() = "+JSON.stringify(wine));
 */
 
-  const newStatusChange = new StatusChange({source: wine.id, modelName: 'Wine', from: 'undefined', to: 'created'});
+  const newStatusChange = new StatusChange({source: wine.id, name: 'Wine', from: 'undefined', to: 'created'});
   newStatusChange.save();
 
     res.redirect('/wines');
@@ -58,7 +61,7 @@ console.log("wine = "+wine);
 };
 
 exports.getAWine = function(req, res) {
-  Wine.findOne({tag: req.params.tag}, function(err, wine) {
+  Wine.findOne({tag: req.params.tag}).populate('wineStyle').exec(function(err, wine) {
     if (err)
       return res.send(err);
 

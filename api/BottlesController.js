@@ -18,7 +18,7 @@ exports.createABottle = function(req, res) {
     if (err)
       return res.send(err);
 
-  const newStatusChange = new StatusChange({source: bottle.id, modelName: 'Bottle', from: 'undefined', to: 'created'});
+  const newStatusChange = new StatusChange({source: bottle.id, name: 'Bottle', from: 'undefined', to: 'created'});
   newStatusChange.save();
 
     res.redirect('/bottles');

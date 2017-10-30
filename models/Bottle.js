@@ -10,10 +10,7 @@ var BottleSchema = new Schema({
     required: true
   },
 
-  location: {
-    type: String,
-    required: true
-  },
+  location: String,
 
   volumeInLiters: {
     type: Number,

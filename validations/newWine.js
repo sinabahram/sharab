@@ -12,7 +12,7 @@ const newWineSchema = {
     maker: nonEmptyRequiredString,
     vintage: positiveInteger.required(),
     hasBubbles: Joi.boolean().required(),
-    wineStyle: nonEmptyRequiredString.alphanum().min(24).max(24),
+    wineStyle: optionalString,
 
     country: optionalString,
     region: optionalString,

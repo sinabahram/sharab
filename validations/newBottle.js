@@ -9,8 +9,9 @@ const optionalString = Joi.string().allow('');
 const newBottleSchema = {
   body: {
     wine: nonEmptyRequiredString.alphanum().min(24).max(24),
-    location: nonEmptyRequiredString,
-    volumeInLiters: Joi.number().min(0.05).max(5).required()
+    volumeInLiters: Joi.number().min(0.05).max(5).required(),
+    price: Joi.number().required(),
+    location: optionalString,
   }
 };
  
