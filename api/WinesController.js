@@ -27,7 +27,7 @@ Wine.findOne({}).sort('-tag').exec(function (err, wineWithMaxTag) {
     if (err)
       return res.send(err);
 
-console.log("wine with max tag = "+wineWithMaxTag);
+//console.log("wine with max tag = "+wineWithMaxTag);
     var maxTag = -1;
     if(wineWithMaxTag === null) {
       maxTag = 0;
@@ -49,7 +49,7 @@ console.log("wine = "+wine);
   console.log("wine in newWine.save() = "+JSON.stringify(wine));
 */
 
-  const newStatusChange = new StatusChange({source: wine.id, from: 'undefined', to: 'created'});
+  const newStatusChange = new StatusChange({source: wine.id, modelName: 'Wine', from: 'undefined', to: 'created'});
   newStatusChange.save();
 
     res.redirect('/wines');

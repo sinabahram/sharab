@@ -1,6 +1,7 @@
 'use strict';
 
 var mongoose = require('mongoose'),
+  StatusChange = mongoose.model('StatusChange'),
   Grape = mongoose.model('Grape');
 
 exports.listAllGrapes = function(req, res) {
@@ -14,6 +15,9 @@ exports.createAGrape = function(req, res) {
   newGrape.save(function(err, grape) {
     if (err)
       return res.send(err);
+
+  const newStatusChange = new StatusChange({source: grape.id, modelName: 'Grape', from: 'undefined', to: 'created'});
+  newStatusChange.save();
 
     res.redirect('/grapes');
   });

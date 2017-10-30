@@ -5,6 +5,7 @@ var ObjectID = mongoose.Schema.Types.ObjectId;
 
 var StatusChangeSchema = new Schema({
   source: ObjectID,
+  modelName: String,
   from: String,
   to: String,
 }, {timestamps: true});

@@ -2,6 +2,7 @@
 
 const mongoose = require('mongoose'),
   Bottle = mongoose.model('Bottle'),
+  StatusChange = mongoose.model('StatusChange'),
   Wine = mongoose.model('Wine');
 
 exports.listAllBottles = function(req, res) {
@@ -16,6 +17,9 @@ exports.createABottle = function(req, res) {
   newBottle.save(function(err, bottle) {
     if (err)
       return res.send(err);
+
+  const newStatusChange = new StatusChange({source: bottle.id, modelName: 'Bottle', from: 'undefined', to: 'created'});
+  newStatusChange.save();
 
     res.redirect('/bottles');
   }); // newBottle.save
