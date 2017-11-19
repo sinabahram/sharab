@@ -4,9 +4,9 @@ var handlebars = require('express-handlebars');
 var handlebarsSections = require('express-handlebars-sections');
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
-var models = require('./models');
-var routes = require('./routes');
 var app = express();
+
+var models = require('./models');
  
 var hbs = handlebars.create({defaultLayout: 'main', partialsDir: ['views/partials/']});
 handlebarsSections(hbs);
@@ -40,10 +40,6 @@ app.use(function (req, res, next) {
   next();
 });
 
-routes.IndexRoutes(app);
-routes.WineRoutes(app);
-routes.BottleRoutes(app);
-routes.GrapeRoutes(app);
-routes.WineStyleRoutes(app);
+var routes = require('./routes')(app);
 
 app.listen(process.env.PORT || 3000)
