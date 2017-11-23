@@ -4,7 +4,7 @@ New Wine
 
 <h1>New Wine</h1>
 
-<form method="post" action="/wines">
+<form method="post" action="/wines" id="newWineForm">
 <label for="name">
 Name
 </label>
@@ -47,6 +47,7 @@ Grape1 Percentage
 <input type="text" id="grape1-percentage" pattern="\d{1,3}" />
 </div>
 </div>
+<input type="hidden" name="grapes" id="grapes" />
 <button type="button" id="btnAddNewGrape">Add Another Grape</button>
 </div>
 
@@ -89,6 +90,7 @@ URL-1
 <input type="url" id="url1" />
 </div>
 </div>
+<input type="hidden" id="urls" />
 <button type="button" id="btnAddNewURL">Add Another URL</button>
 </div>
 
@@ -112,7 +114,7 @@ DrinkBy Year Max
 </label>
 <input type="number" id="drinkByMax" name="drinkByMax" value="2017" min="2017" max="2050" />
 
-<input type="submit" />
+<button type="button" id="btnSubmit">Add Wine</button>
 
 </form>
 
@@ -128,24 +130,61 @@ var newItem1 = item1NameBase+(divs.length+1)+item1NameSuffix;
 newDivChildren[0].setAttribute('for', newItem1);
 newDivChildren[0].innerHTML = newItem1;
 newDivChildren[1].setAttribute('id', newItem1);
+newDivChildren[1].value = '';
 
 var newItem2 = item2NameBase+(divs.length+1)+item2NameSuffix;
 newDivChildren[2].setAttribute('for', newItem2);
 newDivChildren[2].innerHTML = newItem2;
 newDivChildren[3].setAttribute('id', newItem2);
+newDivChildren[3].value = '';
 
 divsContainer.appendChild(newDiv);
 };
 
+var grapesCount = 1;
 var handleAddNewGrape = function(event) {
 addNew('grapes-container', 'grape', '', 'grape', '-percentage');
+grapesCount++;
 };
 
+var urlsCount = 1;
 var handleAddNewURL = function(event) {
 addNew('urls-container', 'url', '-name', 'url', '');
+urlsCount++;
+};
+
+var handleSubmit = function(event) {
+var grapesAsCSV = "";
+for(var i=1; i<=grapesCount; i++) {
+var grape = document.getElementById('grape'+i);
+var grapePercentage = document.getElementById('grape'+i+'-percentage');
+
+grapesAsCSV += grape.options[grape.selectedIndex].value+','+grapePercentage.value;
+if(i < grapesCount)
+grapesAsCSV += ',';
+}
+document.getElementById('grapes').value = grapesAsCSV;
+
+var urlsAsCSV = "";
+for(var i=1; i<=urlsCount; i++) {
+var urlName = document.getElementById('url'+i+'-name').value;
+var url = document.getElementById('url'+i).value;
+
+if(url === '')
+continue;
+
+urlsAsCSV += urlName+','+url;
+if(i < urlsCount)
+urlsAsCSV += ',';
+}
+document.getElementById('urls').value = urlsAsCSV;
+
+console.log('urls = '+urlsAsCSV);
+document.getElementById('newWineForm').submit();
 };
 
 document.getElementById('btnAddNewGrape').addEventListener('click', handleAddNewGrape);
 document.getElementById('btnAddNewURL').addEventListener('click', handleAddNewURL);
+document.getElementById('btnSubmit').addEventListener('click', handleSubmit);
 
 </script>

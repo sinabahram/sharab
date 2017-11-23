@@ -21,7 +21,7 @@ exports.listAllWines = function(req, res) {
 };
 
 exports.createAWine = function(req, res) {
-//  console.log("req.body = "+JSON.stringify(req.body));
+//  console.log("before -> req.body = "+JSON.stringify(req.body));
 
 Wine.findOne({}).sort('-tag').exec(function (err, wineWithMaxTag) {
     if (err)
@@ -36,8 +36,27 @@ else {
       maxTag = wineWithMaxTag.tag;
     }
 
+  var grapes = [];
+  if('grapes' in req.body) {
+    if(req.body.grapes.length === 0)
+      delete req.body.grapes;
+
+    else {
+      var grapesArray = req.body.grapes.split(',');
+      for(var i=0; i<grapesArray.length; i+=2) {
+        grapes.push({grape: grapesArray[i], percentage: grapesArray[i+1]});
+      }
+    }
+  }
+  req.body.grapes = grapes;
+
+  if('urls' in req.body && req.body.urls.length === 0)
+    delete req.body.urls;
+
   if('wineStyle' in req.body && req.body.wineStyle.length === 0)
     delete req.body.wineStyle;
+
+//  console.log("after -> req.body = "+JSON.stringify(req.body));
 
   var newWine = new Wine(req.body);
     newWine.tag = maxTag+1;
@@ -61,7 +80,7 @@ console.log("wine = "+wine);
 };
 
 exports.getAWine = function(req, res) {
-  Wine.findOne({tag: req.params.tag}).populate('wineStyle').exec(function(err, wine) {
+  Wine.findOne({tag: req.params.tag}).populate('wineStyle').populate('grapes.grape').exec(function(err, wine) {
     if (err)
       return res.send(err);
 
