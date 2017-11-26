@@ -60,3 +60,6 @@ typings/
 
 # shell to connect to mongo instance
 mongo-shell.sh
+
+# quick script to run app locally with mongo credentials
+run.sh
