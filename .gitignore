@@ -57,3 +57,6 @@ typings/
 # dotenv environment variables file
 .env
 
+
+# shell to connect to mongo instance
+mongo-shell.sh
