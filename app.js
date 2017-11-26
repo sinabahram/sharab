@@ -18,7 +18,7 @@ app.use(bodyParser.json());
  
 // connect to mongodb
 mongoose.Promise = global.Promise;
-mongoose.connect(process.env.MONGODB_URL, {useMongoClient: true}); 
+mongoose.connect(process.env.MONGODB_URI, {useMongoClient: true}); 
 
 function wantsJson() {
   return this.accepts('html', 'json') === 'json';
