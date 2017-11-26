@@ -18,7 +18,7 @@ app.use(bodyParser.json());
  
 // mongoose instance connection url connection
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://heroku_3nn23cgm:2e2q0q59dtqqbnasohqtqj1ml1@ds141514.mlab.com:41514/heroku_3nn23cgm'); 
+mongoose.connect(process.env.MONGODB_URL); 
 
 function wantsJson() {
   return this.accepts('html', 'json') === 'json';
