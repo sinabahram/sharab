@@ -16,9 +16,9 @@ app.set('view engine', 'handlebars');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
  
-// mongoose instance connection url connection
+// connect to mongodb
 mongoose.Promise = global.Promise;
-mongoose.connect(process.env.MONGODB_URL); 
+mongoose.connect(process.env.MONGODB_URL, {useMongoClient: true}); 
 
 function wantsJson() {
   return this.accepts('html', 'json') === 'json';
