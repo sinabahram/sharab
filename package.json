@@ -26,7 +26,7 @@
     "express-handlebars": "^3.0.0",
     "express-handlebars-sections": "^1.0.1",
     "express-joi-validator": "^2.0.0",
-    "gulp": "^3.9.1",
+    "gulp": "^4.0.2",
     "gulp-jsvalidate": "^3.0.0",
     "mongoose": "^4.11.12"
   },
